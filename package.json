@@ -2,12 +2,11 @@
   "name": "emoji-decode",
   "version": "1.0.0",
   "description": "A web application that allows hiding arbitrary data within emoji characters using variation selectors",
-  "main": "functions/encode.js",
   "type": "module",
   "scripts": {
-    "start": "wrangler dev",
+    "dev": "wrangler pages dev public",
     "build": "echo 'No build step required'",
-    "deploy": "wrangler deploy"
+    "preview": "wrangler pages dev public"
   },
   "keywords": [
     "emoji",

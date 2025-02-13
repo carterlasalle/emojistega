@@ -259,7 +259,7 @@
       errorElement.textContent = '';
       
       try {
-        const res = await fetch('/encode', {
+        const res = await fetch('/api/encode', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ base, message })
@@ -289,7 +289,7 @@
       errorElement.textContent = '';
       
       try {
-        const res = await fetch('/decode', {
+        const res = await fetch('/api/decode', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ encoded })

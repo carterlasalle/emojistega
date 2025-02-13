@@ -1,5 +1,10 @@
-name = "emoji-decode"
-compatibility_date = "2024-01-01"
+[build]
+command = ""
+build_output_directory = "public"
 
 [site]
-bucket = "./public" 
+bucket = "./public"
+
+[env.production]
+name = "emoji-decode"
+compatibility_date = "2024-01-01" 
