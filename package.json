@@ -2,10 +2,12 @@
   "name": "emoji-decode",
   "version": "1.0.0",
   "description": "A web application that allows hiding arbitrary data within emoji characters using variation selectors",
-  "main": "server.js",
+  "main": "functions/encode.js",
+  "type": "module",
+  "packageManager": "yarn@4.5.0",
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "keywords": [
     "emoji",
@@ -13,9 +15,12 @@
     "encoding",
     "decoding"
   ],
-  "author": "",
+  "author": "Carter Lasalle",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "wrangler": "^3.32.0"
   }
 } 
