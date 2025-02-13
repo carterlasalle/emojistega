@@ -1,7 +1,6 @@
 # Dependencies
 node_modules/
-.yarn/
-.pnp.*
+package-lock.json
 
 # Environment variables
 .env
@@ -30,5 +29,3 @@ dist/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-yarn.lock

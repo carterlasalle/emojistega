@@ -18,14 +18,14 @@ The application uses variation selectors (Unicode range U+FE00 to U+FE0F and U+E
 1. Clone the repository
 2. Install dependencies:
    ```bash
-   yarn install
+   npm install
    ```
 
 ## Usage
 
 1. Start the server:
    ```bash
-   yarn start
+   npm start
    ```
 2. Visit http://localhost:3000 in your browser
 3. Use the web interface to:

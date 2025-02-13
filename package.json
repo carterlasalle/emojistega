@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "wrangler dev",
+    "build": "echo 'No build step required'",
     "deploy": "wrangler deploy"
   },
   "keywords": [
