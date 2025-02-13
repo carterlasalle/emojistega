@@ -155,6 +155,17 @@
         font-size: 2rem;
       }
     }
+
+    .loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .error {
+      color: #ef4444;
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
 <body>
@@ -172,6 +183,7 @@
       <label for="message">Your Secret Message</label>
       <textarea id="message" rows="4" placeholder="Enter the message you want to hide..."></textarea>
       <button id="encode-btn">Encode Message</button>
+      <p id="encode-error" class="error"></p>
       
       <div class="output-container">
         <h3>Encoded Result:</h3>
@@ -187,6 +199,7 @@
       <label for="encoded-input">Encoded Emoji String</label>
       <textarea id="encoded-input" rows="4" placeholder="Paste the encoded emoji string here..."></textarea>
       <button id="decode-btn">Decode Message</button>
+      <p id="decode-error" class="error"></p>
       
       <div class="output-container">
         <h3>Decoded Message:</h3>
@@ -230,9 +243,20 @@
       }, 2000);
     }
 
+    // Helper function to set loading state
+    function setLoading(button, isLoading) {
+      button.classList.toggle('loading', isLoading);
+      button.disabled = isLoading;
+    }
+
     document.getElementById('encode-btn').addEventListener('click', async () => {
+      const button = document.getElementById('encode-btn');
+      const errorElement = document.getElementById('encode-error');
       const base = document.getElementById('base-char').value || '😊';
       const message = document.getElementById('message').value;
+      
+      setLoading(button, true);
+      errorElement.textContent = '';
       
       try {
         const res = await fetch('/encode', {
@@ -241,14 +265,28 @@
           body: JSON.stringify({ base, message })
         });
         const data = await res.json();
-        document.getElementById('encoded-output').textContent = data.encoded || data.error;
+        
+        if (data.error) {
+          errorElement.textContent = data.error;
+          document.getElementById('encoded-output').textContent = '';
+        } else {
+          document.getElementById('encoded-output').textContent = data.encoded;
+        }
       } catch (err) {
-        document.getElementById('encoded-output').textContent = 'Error: Failed to encode message';
+        errorElement.textContent = 'Failed to encode message. Please try again.';
+        document.getElementById('encoded-output').textContent = '';
+      } finally {
+        setLoading(button, false);
       }
     });
 
     document.getElementById('decode-btn').addEventListener('click', async () => {
+      const button = document.getElementById('decode-btn');
+      const errorElement = document.getElementById('decode-error');
       const encoded = document.getElementById('encoded-input').value;
+      
+      setLoading(button, true);
+      errorElement.textContent = '';
       
       try {
         const res = await fetch('/decode', {
@@ -257,9 +295,18 @@
           body: JSON.stringify({ encoded })
         });
         const data = await res.json();
-        document.getElementById('decoded-output').textContent = data.decoded || data.error;
+        
+        if (data.error) {
+          errorElement.textContent = data.error;
+          document.getElementById('decoded-output').textContent = '';
+        } else {
+          document.getElementById('decoded-output').textContent = data.decoded;
+        }
       } catch (err) {
-        document.getElementById('decoded-output').textContent = 'Error: Failed to decode message';
+        errorElement.textContent = 'Failed to decode message. Please try again.';
+        document.getElementById('decoded-output').textContent = '';
+      } finally {
+        setLoading(button, false);
       }
     });
 
