@@ -4,7 +4,6 @@
   "description": "A web application that allows hiding arbitrary data within emoji characters using variation selectors",
   "main": "functions/encode.js",
   "type": "module",
-  "packageManager": "yarn@4.5.0",
   "scripts": {
     "start": "wrangler dev",
     "deploy": "wrangler deploy"
